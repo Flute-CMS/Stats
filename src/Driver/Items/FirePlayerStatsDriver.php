@@ -141,7 +141,6 @@ class FirePlayerStatsDriver implements DriverInterface
 
     public function getUserStats(int $sid, User $user): array
     {
-        
         $found = false;
 
         foreach ($user->socialNetworks as $social) {
@@ -165,8 +164,9 @@ class FirePlayerStatsDriver implements DriverInterface
                 ->where('steam_id', 'like', "%" . $found)
                 ->innerJoin('fps_servers_stats')->on('fps_servers_stats.account_id', "fps_players.account_id")
                 ->innerJoin('fps_weapons_stats')->on('fps_weapons_stats.account_id', "fps_players.account_id")
+                ->onWhere('fps_servers_stats.server_id', '=', $this->server_id);
                 ->fetchAll();
-            
+
             if (empty ($select))
                 return [];
 
@@ -207,7 +207,6 @@ class FirePlayerStatsDriver implements DriverInterface
     private function getSteamIds64(array $results): array
     {
         $steamIds64 = [];
-        
         foreach ($results as $result) {
             try {
                 $steamIds64[$result['steam_id']] = $result['steam_id'];
@@ -226,7 +225,8 @@ class FirePlayerStatsDriver implements DriverInterface
         $select = dbal()->database($dbname)->table('fps_players')->select();
         $select->innerJoin('fps_servers_stats')->on('fps_servers_stats.account_id', "fps_players.account_id");
         $select->onWhere('fps_servers_stats.lastconnect', '!=', "-1"); // hide banned players in stats
-
+        $select->andOnWhere('fps_servers_stats.server_id', '=', $this->server_id);
+        
         foreach ($columns as $column) {
             if ($column['searchable'] == 'true' && $column['search']['value'] != '') {
                 $select->where($column['nickname'], 'like', "%" . $column['search']['value'] . "%");
