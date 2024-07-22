@@ -1,6 +1,6 @@
 {
     "name": "Stats",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "stats.module_description",
     "authors": ["Flames"],
     "providers": ["Flute\\Modules\\Stats\\src\\ServiceProviders\\StatsServiceProvider"],
