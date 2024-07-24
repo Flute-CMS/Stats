@@ -279,8 +279,6 @@ class StatsService
                 $additional = [];
             }
 
-            unset($mode->server->dbconnections);
-
             $this->serverModes[$mode->server->id] = [
                 'server' => $mode->server,
                 'db' => $mode->dbname,
