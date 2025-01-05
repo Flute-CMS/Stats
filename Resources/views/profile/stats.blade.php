@@ -14,7 +14,7 @@
 
                                 <div>
                                     <p>{{ __($block['text']) }}</p>
-                                    <div>{{ round($stats['stats'][$key], 2) }}</div>
+                                    <div>{{ is_int($stats['stats'][$key]) ? round($stats['stats'][$key], 2) : $stats['stats'][$key] }}</div>
                                 </div>
                             </div>
                         </div>

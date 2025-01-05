@@ -7,6 +7,7 @@ use Flute\Core\Database\Entities\User;
 use Flute\Modules\Stats\src\Driver\DriverFactory;
 use Flute\Modules\Stats\src\Driver\Items\FabiusDriver;
 use Flute\Modules\Stats\src\Driver\Items\LevelsRanksDriver;
+use Flute\Modules\Stats\src\Driver\Items\ZenithDriver;
 use Flute\Modules\Stats\src\Exceptions\ModNotFoundException;
 use Flute\Modules\Stats\src\Exceptions\ServerNotFoundException;
 
@@ -15,7 +16,8 @@ class StatsService
     protected array $serverModes = [];
     protected array $defaultDrivers = [
         LevelsRanksDriver::class,
-        FabiusDriver::class
+        FabiusDriver::class,
+        ZenithDriver::class,
     ];
 
     protected DriverFactory $driverFactory;
